@@ -28,10 +28,14 @@ def test_gis():
 
 @app.route("/maps/directions", methods=['GET'])
 def test_map_directions():
+    # http://localhost:5000/maps/directions?src=1%20george%20st%20sydney&dst=the%20star%20sydney
+    src = request.args.get('src', type=str)
+    dst = request.args.get('dst', type=str)
+
     m = Maps()
     params = {
-        'origin': '1 George St, Sydney',
-        'destination': 'The Star, Sydney',
+        'origin': src,
+        'destination': dst,
         'mode': 'walking',
         'alternatives': True
     }
