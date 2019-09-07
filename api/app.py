@@ -40,6 +40,21 @@ def map_directions():
     }
     return m.get_directions(**params)
 
+@app.route("/maps/graphhopper", methods=['GET'])
+def map_graphhopper():
+    # http://localhost:5000/maps/graphhopper?src=1%20george%20st%20sydney&dst=the%20star%20sydney&mode=foot
+    src = request.args.get('src', type=str)
+    dst = request.args.get('dst', type=str)
+    mode = request.args.get('mode', type=str)
+
+    m = Maps()
+    params = {
+        'origin': src,
+        'destination': dst,
+        'mode': mode
+    }
+    return m.get_graphhopper(**params)
+
 @app.route("/gis/green", methods=['GET'])
 def green_cover_gis():
     lon = request.args.get('lon', type=float)
