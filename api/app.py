@@ -6,6 +6,7 @@ from flask_cors import CORS
 # GIS
 from gis import GISUrbanHeatIndex
 from gis import GISUrbanHeatIndex, ESRI_POINT
+from maps import Maps
 
 app = Flask(__name__, static_url_path = "")
 CORS(app)
@@ -24,6 +25,17 @@ def test_gis():
         'geometryType': ESRI_POINT
     })
     return make_response(jsonify(response), 200)
+
+@app.route("/maps/directions", methods=['GET'])
+def test_map_directions():
+    m = Maps()
+    params = {
+        'origin': '1 George St, Sydney',
+        'destination': 'The Star, Sydney',
+        'mode': 'walking',
+        'alternatives': True
+    }
+    return m.get_directions(**params)
 
 @auth.get_password
 def get_password(username):

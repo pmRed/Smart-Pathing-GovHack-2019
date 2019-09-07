@@ -29,7 +29,7 @@ class GISUrbanHeatIndex:
   def retrieve_point(self, params, rformat='json'):
     params['f'] = rformat
     params['geometry'] = json.dumps(params['geometry'])
-    params['outFields'] = 'UHI_16_m'
+    params['outFields'] = 'UHI_16_m,SA1_MAIN16,SA1_7DIG16,SA2_MAIN16,SA2_5DIG16'
     params['inSR'] = '4283'
 
     self.logger.info("Creating request with params={}".format(params))
@@ -38,7 +38,19 @@ class GISUrbanHeatIndex:
     self.logger.info("URL: {}".format(request.url))
 
     if request.status_code == 200:
-      return request.json()
+      # convert geometry/rings to Polygon points for gmaps
+      response = request.json()
+      rings = response['features'][0]['geometry']['rings'][0]
+      polycoords = []
+
+      for coord in rings:
+        polycoords.append({
+          'lng': coord[0],
+          'lat': coord[1]
+        })
+      response['features'][0]['geometry'] = polycoords
+
+      return response
 
     self.logger.error("Error retrieving data from GIS API: {} - {}"
                       .format(request.status_code, request.content))
