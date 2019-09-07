@@ -36,7 +36,7 @@ def test_map_directions():
     params = {
         'origin': src,
         'destination': dst,
-        'mode': 'walking',
+        'mode': 'cycling',
         'alternatives': True
     }
     return m.get_directions(**params)
