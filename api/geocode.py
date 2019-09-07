@@ -23,6 +23,12 @@ class Geocode:
       res = req.json()
 
       # Use the first result
+      # if len(res['results']) == 0:
+      #   return {}
+
+      print('------')
+      print(req.content)
+
       result = res['results'][0]
 
       geodata = dict()
@@ -32,4 +38,5 @@ class Geocode:
       return {
         'pos': [geodata['lat'], geodata['lng']]
       }
+
     self.logger.error("Error retreiving data: {}", req.content)

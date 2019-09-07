@@ -157,14 +157,14 @@ const TravelCard = inject('maps')(
 						color={getOverlayColor('green')}
 						onClick={setOverlay('green')}
 					>
-						Greenery Map
+						Max Greenery 
 					</IconButton>
 					<IconButton 
 						aria-label="ride"
 						color={getOverlayColor('heat')}
 						onClick={setOverlay('heat')}
 					>
-						Urban Heatmap
+						Min Urban Heat 
 					</IconButton>
 				</Grid>
 
