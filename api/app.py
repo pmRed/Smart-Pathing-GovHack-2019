@@ -6,6 +6,7 @@ from flask_cors import CORS
 # GIS
 from gis import GISUrbanHeatIndex, GISGreenCover, ESRI_POINT
 from maps import Maps
+from geocode import Geocode
 
 app = Flask(__name__, static_url_path = "")
 CORS(app)
@@ -54,6 +55,13 @@ def map_graphhopper():
         'mode': mode
     }
     return m.get_graphhopper(**params)
+
+@app.route("/maps/geocode", methods=['GET'])
+def geocode():
+    address = request.args.get('address', type=str)
+
+    m = Geocode()
+    return make_response(jsonify(m.geocode(address)), 200)
 
 @app.route("/gis/green", methods=['GET'])
 def green_cover_gis():
