@@ -3,9 +3,21 @@ from flask import Flask, jsonify, abort, request, make_response, url_for
 from flask_httpauth import HTTPBasicAuth
 from flask_cors import CORS
 
+# GIS
+from api.gis import GISUrbanHeatIndex
+
 app = Flask(__name__, static_url_path = "")
 CORS(app)
 auth = HTTPBasicAuth()
+
+@app.route("/gis", methods=['GET'])
+def test_gis():
+    gis = GISUrbanHeatIndex()
+    gis.retrieve_point(
+    params={
+        'geometry': {"x" : 151.209900, "y" : -33.865143, "spatialReference" : {"wkid" : 4283}},
+        'geometryType': GISUrbanHeatIndex.POINT,'outFields': '*'
+    })
 
 @auth.get_password
 def get_password(username):
@@ -17,7 +29,7 @@ def get_password(username):
 def unauthorized():
     return make_response(jsonify( { 'error': 'Unauthorized access' } ), 403)
     # return 403 instead of 401 to prevent browsers from displaying the default auth dialog
-    
+
 @app.errorhandler(400)
 def not_found(error):
     return make_response(jsonify( { 'error': 'Bad request' } ), 400)
