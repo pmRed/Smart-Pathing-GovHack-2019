@@ -1,21 +1,21 @@
-import { Home, ContentPaste, Notifications, AccountCircle } from '@material-ui/icons';
-import HomePage from '../pages/Home/HomePage';
-import ProfilePage from '../pages/Profile/ProfilePage';
+import { Home, Map } from '@material-ui/icons';
+import HomePage from '../pages/index';
+import GMapPage from '../pages/gmap';
 
 const Routes = [
   {
-    path: '/dashboard/home',
+    path: '/',
     sidebarName: 'Home',
     navbarName: 'Home',
     icon: Home,
     component: HomePage
   },
   {
-    path: '/dashboard/profile',
-    sidebarName: 'Profile',
-    navbarName: 'Profile',
-    icon: AccountCircle,
-    component: ProfilePage
+    path: '/gmap',
+    sidebarName: 'Sydney',
+    navbarName: 'Sydney',
+    icon: Map,
+    component: GMapPage 
   }
 ];
 

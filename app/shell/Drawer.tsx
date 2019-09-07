@@ -1,8 +1,10 @@
 import React from 'react';
 import ShellStore from './Store'
 import { inject, observer } from 'mobx-react'
-import { SwipeableDrawer,  ListItemText, ListItem, makeStyles, List, ListItemIcon, MenuItem } from '@material-ui/core';
-import MapIcon from '@material-ui/icons/Map'
+import Link from 'next/link'
+import { SwipeableDrawer,  ListItemText, makeStyles, ListItemIcon, MenuList, MenuItem } from '@material-ui/core';
+import { useRouter } from 'next/router'
+import routes from './Routes'
 
 type InjectedProps = {
     shell?: ShellStore
@@ -18,6 +20,7 @@ const Drawer = inject('shell')(
     observer ( ( props : InjectedProps) => {
         const { shell } = props;
         const classes = useStyles();
+        const router = useRouter()
 
         const toggleDrawer = (open: boolean) => (
             event: React.KeyboardEvent | React.MouseEvent,
@@ -41,19 +44,22 @@ const Drawer = inject('shell')(
                 onOpen={toggleDrawer(true)}
             >
                 <div className={classes.drawerEntries}>
-                    <MenuItem>Menu Item</MenuItem>
-                    <MenuItem>Menu Item 2</MenuItem>
-                    <List>
-                        <ListItem 
-                            button 
-                            key="GMaps"
-                        >
-                            <ListItemIcon>
-                                <MapIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="GMaps" />
-                        </ListItem>
-                    </List>
+                    <MenuList>
+                    {routes.map((prop, key) => {
+                    return (
+                        <Link prefetch href={prop.path} passHref key={key}>
+                            <MenuItem 
+                                selected={prop.path==router.route}
+                            >
+                                <ListItemIcon>
+                                <prop.icon />
+                                </ListItemIcon>
+                                <ListItemText primary={prop.sidebarName} />
+                            </MenuItem>
+                        </Link>
+                    )
+                    })}
+                    </MenuList>
                 </div>
             </SwipeableDrawer>
         );
