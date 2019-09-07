@@ -77,6 +77,8 @@ const TravelCard = inject('maps')(
 		}
 		maps!.setSource(source)
 		maps!.setDestination(destination)
+		maps!.flipTrigger()
+		// console.log(source, destination)
 	}
 
 	return (
