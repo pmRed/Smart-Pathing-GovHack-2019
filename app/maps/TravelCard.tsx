@@ -17,17 +17,23 @@ const useStyles = makeStyles((theme: Theme) =>
 	},
 	grid: {
 		display: 'flex',
+		flexWrap: 'wrap',
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
     input: {
       marginLeft: theme.spacing(1),
 	  flex: 1,
-	  width: '500px'
+	  width: '500px',
+	  minWidth: '300px'
     },
     button: {
       margin: 10,
-    }
+	},
+	buttonIcon: {
+
+      marginLeft: theme.spacing(1),
+	}
   })
 );
 
@@ -41,6 +47,30 @@ const TravelCard = inject('maps')(
 	const [destination, setDestination] = useState('');
 	const classes = useStyles();
 	const { maps } = props
+
+	const setOverlay = (overlay : string) => (
+		event: React.KeyboardEvent | React.MouseEvent,
+	) => {
+		if (
+		event &&
+		event.type === 'keydown' &&
+		((event as React.KeyboardEvent).key === 'Tab' ||
+			(event as React.KeyboardEvent).key === 'Shift')
+		) {
+			return;
+		}
+
+		maps!.setOverlay(overlay)
+	};
+
+	const getOverlayColor = ( overlay : string ) => {
+		if (overlay == maps!.overlay) {
+			return 'primary'
+		}
+		else {
+			return 'default'
+		}
+	}
 
 	const setMode = (mode : string) => (
 		event: React.KeyboardEvent | React.MouseEvent,
@@ -92,7 +122,7 @@ const TravelCard = inject('maps')(
 				<Grid 
 					item 
 					xs={12}
-					className={classes.grid}
+					 className={classes.grid}
 				>
 					<IconButton 
 						aria-label="walk" 
@@ -114,6 +144,27 @@ const TravelCard = inject('maps')(
 						onClick={setMode('bus')}
 					>
 						<DirectionsBus />
+					</IconButton>
+				</Grid>
+
+				<Grid 
+					item 
+					xs={12}
+					 className={classes.grid}
+				>
+					<IconButton 
+						aria-label="walk" 
+						color={getOverlayColor('green')}
+						onClick={setOverlay('green')}
+					>
+						Greenery Map
+					</IconButton>
+					<IconButton 
+						aria-label="ride"
+						color={getOverlayColor('heat')}
+						onClick={setOverlay('heat')}
+					>
+						Urban Heatmap
 					</IconButton>
 				</Grid>
 
@@ -151,7 +202,7 @@ const TravelCard = inject('maps')(
 						className={classes.button}
 					>
 						Search
-						<DirectionsIcon />
+						<DirectionsIcon className={classes.buttonIcon}/>
 					</Button>
 				</Grid>
 

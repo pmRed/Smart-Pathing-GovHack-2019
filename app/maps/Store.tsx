@@ -4,10 +4,15 @@ export default class MapStore {
     @observable source : string = 'pyrmont, sydney';
     @observable destination : string = 'redfern, sydney';
     @observable mode : string = 'walk';
+    @observable overlay : string = 'green'
     @observable trigger : boolean = false;
 
     @action setMode(mode: string) {
         this.mode = mode
+    }
+
+    @action setOverlay(overlay: string){
+        this.overlay = overlay
     }
 
     @action setDestination(destination: string) {
