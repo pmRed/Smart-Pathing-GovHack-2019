@@ -1,7 +1,7 @@
 import React from 'react'
 import fetch from 'isomorphic-unfetch'
 import Shell from '../shell/Layout'
-const APIURL = 'http://localhost:5000/'
+const APIURL = 'http://backend:5000/'
 
 const TestComponent = (props: { test: string }) => (
 	<Shell>
