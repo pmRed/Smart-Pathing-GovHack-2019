@@ -5,19 +5,25 @@ from flask_cors import CORS
 
 # GIS
 from gis import GISUrbanHeatIndex
+from gis import GISUrbanHeatIndex, ESRI_POINT
 
 app = Flask(__name__, static_url_path = "")
 CORS(app)
 auth = HTTPBasicAuth()
 
-@app.route("/gis", methods=['GET'])
+@app.route("/gis/uih", methods=['GET'])
 def test_gis():
+    # sydney = 151.209900, -33.865143
+    # http://localhost:5000/gis/uih?lon=151.209900&lat=-33.865143
+    lon = request.args.get('lon', type=float)
+    lat = request.args.get('lat', type=float)
     gis = GISUrbanHeatIndex()
-    gis.retrieve_point(
+    response = gis.retrieve_point(
     params={
-        'geometry': {"x" : 151.209900, "y" : -33.865143, "spatialReference" : {"wkid" : 4283}},
-        'geometryType': GISUrbanHeatIndex.POINT,'outFields': '*'
+        'geometry': {"x" : lon, "y" : lat},
+        'geometryType': ESRI_POINT
     })
+    return make_response(jsonify(response), 200)
 
 @auth.get_password
 def get_password(username):
