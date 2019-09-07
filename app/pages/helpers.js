@@ -1,7 +1,13 @@
-const getHSL = (value) => {
+const getHSLRed = (value) => {
   //value from 0 to 1
   var hue = ( (1-value) * 60 + 340).toString(10);
   return [hue, 100, 50]
+};
+
+const getHSLGreen = (value) => {
+  //value from 0 to 1
+  var hue = ( (1 - value) * 60 + 180).toString(10);
+  return [hue, 100, 150]
 };
 
 const hslToHex = (h, s, l) => {
@@ -35,6 +41,7 @@ const hslToHex = (h, s, l) => {
 
 
 module.exports = {
-  getHSL,
+  getHSLRed,
+  getHSLGreen,
   hslToHex
 };

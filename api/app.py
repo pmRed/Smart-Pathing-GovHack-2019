@@ -4,8 +4,7 @@ from flask_httpauth import HTTPBasicAuth
 from flask_cors import CORS
 
 # GIS
-from gis import GISUrbanHeatIndex
-from gis import GISUrbanHeatIndex, ESRI_POINT
+from gis import GISUrbanHeatIndex, GISGreenCover, ESRI_POINT
 from maps import Maps
 
 app = Flask(__name__, static_url_path = "")
@@ -13,7 +12,7 @@ CORS(app)
 auth = HTTPBasicAuth()
 
 @app.route("/gis/uih", methods=['GET'])
-def test_gis():
+def uih_gis():
     # sydney = 151.209900, -33.865143
     # http://localhost:5000/gis/uih?lon=151.209900&lat=-33.865143
     lon = request.args.get('lon', type=float)
@@ -27,7 +26,7 @@ def test_gis():
     return make_response(jsonify(response), 200)
 
 @app.route("/maps/directions", methods=['GET'])
-def test_map_directions():
+def map_directions():
     # http://localhost:5000/maps/directions?src=1%20george%20st%20sydney&dst=the%20star%20sydney
     src = request.args.get('src', type=str)
     dst = request.args.get('dst', type=str)
@@ -40,6 +39,18 @@ def test_map_directions():
         'alternatives': True
     }
     return m.get_directions(**params)
+
+@app.route("/gis/green", methods=['GET'])
+def green_cover_gis():
+    lon = request.args.get('lon', type=float)
+    lat = request.args.get('lat', type=float)
+    gis = GISGreenCover()
+    response = gis.retrieve_point(
+        params={
+            'geometry': {"x" : lon, "y" : lat},
+            'geometryType': ESRI_POINT
+        })
+    return make_response(jsonify(response), 200)
 
 @auth.get_password
 def get_password(username):

@@ -10,6 +10,20 @@ ESRI_POLYGON = 'esriGeometryPolygon'
 ESRI_ENVELOPE = 'esriGeometryEnvelope'
 
 
+def convert_rings(response):
+  # convert geometry/rings to Polygon points for gmaps
+  rings = response['features'][0]['geometry']['rings'][0]
+  polycoords = []
+
+  for coord in rings:
+    polycoords.append({
+      'lng': coord[0],
+      'lat': coord[1]
+    })
+  response['features'][0]['geometry'] = polycoords
+  return response
+
+
 class GISUrbanHeatIndex:
   base_url = 'https://mapprod2.environment.nsw.gov.au/arcgis/rest/services/UHGC/UHGC/MapServer/0/query'
 
@@ -38,18 +52,8 @@ class GISUrbanHeatIndex:
     self.logger.info("URL: {}".format(request.url))
 
     if request.status_code == 200:
-      # convert geometry/rings to Polygon points for gmaps
       response = request.json()
-      rings = response['features'][0]['geometry']['rings'][0]
-      polycoords = []
-
-      for coord in rings:
-        polycoords.append({
-          'lng': coord[0],
-          'lat': coord[1]
-        })
-      response['features'][0]['geometry'] = polycoords
-
+      response = convert_rings(response)
       return response
 
     self.logger.error("Error retrieving data from GIS API: {} - {}"
@@ -59,34 +63,34 @@ class GISUrbanHeatIndex:
 class GISGreenCover:
   base_url = 'https://mapprod2.environment.nsw.gov.au/arcgis/rest/services/UHGC/UHGC/MapServer/2/query'
   out_fields = [
-    'LGA',
-    'Region',
-    'District',
-    'LandType',
-    'MB_Reclass',
-    'MMB_Type',
-    'allArea',
-    'FullArea',
-    'FulArRatio',
-    'AreaGrass',
-    'AreaShrub',
-    'ArTr03_10m',
-    'ArTr10_15m',
-    'ArTr15mPl',
-    'ArAnyTree',
-    'ArAnyVeg',
-    'ArShrTree',
-    'PerGrass',
-    'PerShrub',
-    'PerTr03_10',
-    'PerTr10_15',
-    'PerTr15mPl',
-    'PerAnyTree',
-    'PerShrTr',
+    # 'LGA',
+    # 'Region',
+    # 'District',
+    # 'LandType',
+    # 'MB_Reclass',
+    # 'MMB_Type',
+    # 'allArea',
+    # 'FullArea',
+    # 'FulArRatio',
+    # 'AreaGrass',
+    # 'AreaShrub',
+    # 'ArTr03_10m',
+    # 'ArTr10_15m',
+    # 'ArTr15mPl',
+    # 'ArAnyTree',
+    # 'ArAnyVeg',
+    # 'ArShrTree',
+    # 'PerGrass',
+    # 'PerShrub',
+    # 'PerTr03_10',
+    # 'PerTr10_15',
+    # 'PerTr15mPl',
+    # 'PerAnyTree',
+    # 'PerShrTr',
     'PerAnyVeg',
-    'PerNonVeg',
-    'DataCover',
-    'CompDataYN'
+    # 'PerNonVeg',
+    # 'DataCover',
+    # 'CompDataYN'
   ]
 
   def __init__(self):
@@ -104,7 +108,10 @@ class GISGreenCover:
     self.logger.info("URL: {}".format(request.url))
 
     if request.status_code == 200:
-      return request.json()
+      if request.status_code == 200:
+        response = request.json()
+        response = convert_rings(response)
+        return response
 
     self.logger.error("Error retrieving data from GIS API: {} - {}"
                       .format(request.status_code, request.content))
