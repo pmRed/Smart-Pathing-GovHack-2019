@@ -2,16 +2,25 @@ import React from 'react'
 import Head from 'next/head'
 import Drawer from './Drawer'
 import AppBar from './AppBar'
+// import { makeStyles } from '@material-ui/core';
 
 type Props = {
     title?: string
 }
 
+// const useStyles = makeStyles(() => ({
+// 	content: {
+// 	  height: '100%',
+// 	  display: 'flex',
+// 	  flexDirection: 'column'
+// 	}
+// }));
+
 class Shell extends React.Component<Props> {
     render() {
         const { children, title } = this.props
         return(
-            <div>
+            <div style={{height: '100vh'}}>
 
                 <Head>
                     <title>{title}</title>
@@ -23,8 +32,9 @@ class Shell extends React.Component<Props> {
 
                 <Drawer />
                 
-                {children}
-
+                <div style={{height: '85%', width: '100%'}}>
+                    {children}
+                </div>
             </div>
         )
     }

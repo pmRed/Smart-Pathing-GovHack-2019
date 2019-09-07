@@ -1,5 +1,4 @@
-import React from 'react'
-// import fetch from 'isomorphic-unfetch'
+import React  from 'react'
 import Shell from '../shell/Layout'
 import { Container } from 'next/app';
 import { Typography, Grid, Button } from '@material-ui/core';
@@ -25,12 +24,11 @@ const useStyles = makeStyles(theme => ({
 
 const TestComponent = () =>{
 	const classes = useStyles();
-	// const imageUrl = window.innerWidth >= 650 ? desktopImage : mobileImage;
-
+	const imageUrl = '/static/hero2.jpg';
 	return (
 		<Shell title="SmartMaps">
 			<div className={classes.heroContent}
-				// style={{backgroundImage: `url(${imageUrl})` }}
+				style={{backgroundImage: `url(${imageUrl})` }}
 			>
 				<Container maxWidth="sm">
 					<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
