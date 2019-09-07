@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { AccountCircle } from '@material-ui/icons'
+// import { AccountCircle } from '@material-ui/icons'
 import MenuIcon from '@material-ui/icons/Menu'
 import { AppBar, 
     Toolbar, 
@@ -46,14 +46,14 @@ const TopAppBar = inject('shell')(
                         className={classes.title}> 
                         {title}
                     </Typography>
-                    <IconButton
+                    {/* <IconButton
                         aria-label="account of current user"
                         aria-controls="menu-appbar"
                         aria-haspopup="true"
                         color="inherit"
                     >
                         <AccountCircle />
-                    </IconButton>
+                    </IconButton> */}
                 </Toolbar>
                 </AppBar>
             </div>

@@ -1,15 +1,16 @@
 import React from 'react';
 import ShellStore from './Store'
 import { inject, observer } from 'mobx-react'
-import { SwipeableDrawer,  ListItemText, ListItem, makeStyles } from '@material-ui/core';
+import { SwipeableDrawer,  ListItemText, ListItem, makeStyles, List, ListItemIcon, MenuItem } from '@material-ui/core';
+import MapIcon from '@material-ui/icons/Map'
 
 type InjectedProps = {
     shell?: ShellStore
 }
 
 const useStyles = makeStyles({
-    drawer: {
-        width: 250,
+    drawerEntries: {
+        width: 200,
     }
 })
 
@@ -34,19 +35,27 @@ const Drawer = inject('shell')(
         };
 
         return (
-            <div className={classes.drawer}>
-                <SwipeableDrawer
-                    open={shell!.drawerActive}
-                    onClose={toggleDrawer(false)}
-                    onOpen={toggleDrawer(true)}
-                >
-                    {
-                        <ListItem button key="Home">
-                            <ListItemText primary="Home" />
+            <SwipeableDrawer
+                open={shell!.drawerActive}
+                onClose={toggleDrawer(false)}
+                onOpen={toggleDrawer(true)}
+            >
+                <div className={classes.drawerEntries}>
+                    <MenuItem>Menu Item</MenuItem>
+                    <MenuItem>Menu Item 2</MenuItem>
+                    <List>
+                        <ListItem 
+                            button 
+                            key="GMaps"
+                        >
+                            <ListItemIcon>
+                                <MapIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="GMaps" />
                         </ListItem>
-                    }
-                </SwipeableDrawer>
-            </div>
+                    </List>
+                </div>
+            </SwipeableDrawer>
         );
     })
 )

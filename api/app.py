@@ -1,10 +1,10 @@
-#!flask/bin/python
+#!bin/python
 from flask import Flask, jsonify, abort, request, make_response, url_for
 from flask_httpauth import HTTPBasicAuth
 from flask_cors import CORS
 
 # GIS
-from api.gis import GISUrbanHeatIndex
+from gis import GISUrbanHeatIndex
 
 app = Flask(__name__, static_url_path = "")
 CORS(app)
