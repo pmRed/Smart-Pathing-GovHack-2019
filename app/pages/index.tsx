@@ -1,7 +1,6 @@
 import React  from 'react'
 import Shell from '../shell/Layout'
-import { Container } from 'next/app';
-import { Typography, Grid, Button } from '@material-ui/core';
+import { Container, Typography, Grid, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 // const APIURL = 'http://localhost:5000/'
@@ -12,6 +11,11 @@ const useStyles = makeStyles(theme => ({
 	},
 	heroContent: {
 	  backgroundColor: theme.palette.background.paper,
+	//   backgroundSize: '100%',
+	  backgroundPosition: 'center',
+	  backgroundRepeat: 'no-repeat',
+	  backgroundSize: 'cover',
+	//   WebkitFilter: 'blur(8px)', 
 	  padding: theme.spacing(8, 0, 6),
 	  height: '100%',
 	  display: 'flex',
@@ -20,21 +24,30 @@ const useStyles = makeStyles(theme => ({
 	heroButtons: {
 	  marginTop: theme.spacing(4),
 	},
+	background: {
+		backgroundColor: 'grey',
+		paddingTop: '10%',
+		paddingBottom: '10%',
+		marginLeft: '10%',
+		marginRight: '10%'
+	}
+
 }));
 
 const TestComponent = () =>{
 	const classes = useStyles();
-	const imageUrl = '/static/hero2.jpg';
+	const imageUrl = '/static/hero3.jpg';
 	return (
 		<Shell title="SmartMaps">
 			<div className={classes.heroContent}
 				style={{backgroundImage: `url(${imageUrl})` }}
 			>
-				<Container maxWidth="sm">
+				<Container >
+					<div className={classes.background}>
 					<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
 						Title
 					</Typography>
-					<Typography variant="h5" align="center" color="textSecondary" paragraph>
+					<Typography variant="h5" align="center" color="textPrimary" paragraph>
 						Short and snappy header
 					</Typography>
 					<div className={classes.heroButtons}>
@@ -50,6 +63,7 @@ const TestComponent = () =>{
 							</Button>
 						</Grid>
 						</Grid>
+					</div>
 					</div>
 				</Container>
 			</div>

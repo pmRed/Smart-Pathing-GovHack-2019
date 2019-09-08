@@ -154,18 +154,18 @@ const TravelCard = inject('maps')(
 					 className={classes.grid}
 				>
 					<IconButton 
-						aria-label="walk" 
-						color={getOverlayColor('green')}
-						onClick={setOverlay('green')}
-					>
-						Greenery 
-					</IconButton>
-					<IconButton 
-						aria-label="ride"
+						aria-label="heat"
 						color={getOverlayColor('heat')}
 						onClick={setOverlay('heat')}
 					>
 						Urban Heat 
+					</IconButton>
+					<IconButton 
+						aria-label="green" 
+						color={getOverlayColor('green')}
+						onClick={setOverlay('green')}
+					>
+						Greenery 
 					</IconButton>
 				</Grid>
 
@@ -218,16 +218,16 @@ const TravelCard = inject('maps')(
 							RouteColor
 						</TableCell>
 						<TableCell>
-							Heat	
+							Heat Index (deg)
 						</TableCell>
 						<TableCell>
-							Greenery	
+							Greenery (%)
 						</TableCell>
 						<TableCell>
-							Distance	
+							Distance (km)
 						</TableCell>
 						<TableCell>
-							Time
+							Time (min)
 						</TableCell>
 				    </TableHead>
 				    <TableBody>
@@ -248,10 +248,10 @@ const TravelCard = inject('maps')(
 										>
 										</div>
 									</TableCell>
-									<TableCell align="right">{row.heat ? 'Waiting' : row.heat}</TableCell>
-									<TableCell align="right">{row.green? 'Waiting' : row.green}</TableCell>
-									<TableCell align="right">{row.time}</TableCell>
-									<TableCell align="right">{row.distance/1000}</TableCell>
+									<TableCell align="right">{row.heat ? row.heat : 'Waiting'} </TableCell>
+									<TableCell align="right">{row.green ? row.green : 'Waiting'} </TableCell>
+									<TableCell align="right">{row.distance} </TableCell>
+									<TableCell align="right">{row.time} </TableCell>
 								</TableRow>
 							)
 						})}

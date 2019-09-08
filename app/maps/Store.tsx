@@ -1,10 +1,10 @@
 import { observable, action, computed } from 'mobx'
 
 export default class MapStore {
-    @observable source : string = 'pyrmont, sydney';
-    @observable destination : string = 'redfern, sydney';
+    @observable source : string = 'Millers Point, Sydney';
+    @observable destination : string = 'Darlinghurst, Sydney';
     @observable mode : string = 'walk';
-    @observable overlay : string = 'green'
+    @observable overlay : string = 'heat'
     @observable trigger : boolean = false;
     @observable table: any = [{}];
 
