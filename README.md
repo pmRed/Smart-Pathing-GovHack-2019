@@ -1,3 +1,5 @@
+# SmartMaps
+
 ## Project Description
 This project attempts to display transit directions between two locations with information about temperature deviation due to heat island and green cover over the route.
 Access the portal at http://smartpaths.govhack.thaum.io:3000/gmap
