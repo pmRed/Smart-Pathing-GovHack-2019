@@ -4,7 +4,7 @@ import { DirectionsWalk, DirectionsBike, DirectionsBus } from '@material-ui/icon
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import {inject, observer} from 'mobx-react'
-import { Paper, Grid, TextField, Button } from '@material-ui/core';
+import { Paper, Grid, TextField, Button, TableHead, TableCell } from '@material-ui/core';
 import MapsStore from './Store'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -61,6 +61,7 @@ const TravelCard = inject('maps')(
 		}
 
 		maps!.setOverlay(overlay)
+		maps!.flipTrigger()
 	};
 
 	const getOverlayColor = ( overlay : string ) => {
@@ -83,8 +84,8 @@ const TravelCard = inject('maps')(
 		) {
 			return;
 		}
-
 		maps!.setMode(mode)
+		maps!.flipTrigger()
 	};
 
 	const getColor = ( mode : string ) => {
@@ -157,14 +158,14 @@ const TravelCard = inject('maps')(
 						color={getOverlayColor('green')}
 						onClick={setOverlay('green')}
 					>
-						Max Greenery 
+						Greenery 
 					</IconButton>
 					<IconButton 
 						aria-label="ride"
 						color={getOverlayColor('heat')}
 						onClick={setOverlay('heat')}
 					>
-						Min Urban Heat 
+						Urban Heat 
 					</IconButton>
 				</Grid>
 
@@ -206,6 +207,30 @@ const TravelCard = inject('maps')(
 					</Button>
 				</Grid>
 
+				<Grid 
+					item 
+					xs={12}
+					className={classes.grid}
+				>
+					<TableHead>
+						<TableCell>
+							RouteId
+						</TableCell>
+						<TableCell>
+							Heat	
+						</TableCell>
+						<TableCell>
+							Greenery	
+						</TableCell>
+						<TableCell>
+							Distance	
+						</TableCell>
+						<TableCell>
+							Time
+						</TableCell>
+				    </TableHead>
+
+				</Grid>
 			</Grid>
 		</Paper>
 	);
