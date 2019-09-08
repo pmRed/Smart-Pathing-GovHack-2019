@@ -59,7 +59,7 @@ const TestComponent = () =>{
 						Going from A to B in a city is shouldn't just about speed. It should be about safety, comfort and enjoyment. SmartMaps allows you to make travel decisions based upon these factors. 
 					</Typography>
 					<Typography variant="h5" align="center" color="textPrimary" paragraph>
-						Given a mode of transport, our algorithm provides you with human centric data about possible routes between your location and another. In particular, it measures the urban heat and greenery coverage and provides a selection of the best routes. Empowering the you to make informed pathing decisions.
+						Given a mode of transport, our algorithm provides you with human centric data about possible routes between your location and another. In particular, it measures the urban heat and greenery coverage and provides a selection of the best routes. Empowering you to make informed pathing decisions.
 					</Typography>
 					<Button variant="contained" color="primary"
 					href="/gmap"
