@@ -12,7 +12,7 @@ app = Flask(__name__, static_url_path = "")
 CORS(app)
 auth = HTTPBasicAuth()
 
-@app.route("/gis/uih", methods=['GET'])
+@app.route("/gis/uhi", methods=['GET'])
 def uih_gis():
     # sydney = 151.209900, -33.865143
     # http://localhost:5000/gis/uih?lon=151.209900&lat=-33.865143
