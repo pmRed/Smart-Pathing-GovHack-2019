@@ -1,6 +1,6 @@
 import React  from 'react'
 import Shell from '../shell/Layout'
-import { Container, Typography, Grid, Button } from '@material-ui/core';
+import { Container, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 // const APIURL = 'http://localhost:5000/'
@@ -19,17 +19,24 @@ const useStyles = makeStyles(theme => ({
 	  padding: theme.spacing(8, 0, 6),
 	  height: '100%',
 	  display: 'flex',
-	  flexDirection: 'column'
+	  alignItems: 'center',
+	  justifyContent: 'center'
 	},
 	heroButtons: {
 	  marginTop: theme.spacing(4),
 	},
 	background: {
-		backgroundColor: 'grey',
+		backgroundColor: 'rgba(255, 255, 255, 0.5)',
+		borderRadius: '25px',
 		paddingTop: '10%',
 		paddingBottom: '10%',
+		paddingRight: '5%',
+		paddingLeft: '5%',
 		marginLeft: '10%',
-		marginRight: '10%'
+		marginRight: '10%',
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center'
 	}
 
 }));
@@ -42,28 +49,23 @@ const TestComponent = () =>{
 			<div className={classes.heroContent}
 				style={{backgroundImage: `url(${imageUrl})` }}
 			>
-				<Container >
+				<Container 
+				style={{}} >
 					<div className={classes.background}>
 					<Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-						Title
+						Welcome to SmartMaps	
 					</Typography>
 					<Typography variant="h5" align="center" color="textPrimary" paragraph>
-						Short and snappy header
+						Going from A to B in a city is shouldn't just about speed. It should be about safety, comfort and enjoyment. SmartMaps allows you to make travel decisions based upon these factors. 
 					</Typography>
-					<div className={classes.heroButtons}>
-						<Grid container spacing={2} justify="center">
-						<Grid item>
-							<Button variant="contained" color="primary">
-							Navigation call to action
-							</Button>
-						</Grid>
-						<Grid item>
-							<Button variant="contained" color="primary">
-							Navigation call to action
-							</Button>
-						</Grid>
-						</Grid>
-					</div>
+					<Typography variant="h5" align="center" color="textPrimary" paragraph>
+						Given a mode of transport, our algorithm provides you with human centric data about possible routes between your location and another. In particular, it measures the urban heat and greenery coverage and provides a selection of the best routes. Empowering the you to make informed pathing decisions.
+					</Typography>
+					<Button variant="contained" color="primary"
+					href="/gmap"
+					>
+						Evaluate Your Route
+					</Button>
 					</div>
 				</Container>
 			</div>

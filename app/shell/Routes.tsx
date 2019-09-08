@@ -1,7 +1,7 @@
 import { Home, Map } from '@material-ui/icons';
 import HomePage from '../pages/index';
 import HeatMapPage from '../pages/gmap';
-import GreenMapPage from '../pages/green';
+// import GreenMapPage from '../pages/green';
 
 const Routes = [
   {
@@ -13,18 +13,18 @@ const Routes = [
   },
   {
     path: '/gmap',
-    sidebarName: 'Heat Map',
-    navbarName: 'Heat Map',
+    sidebarName: 'SmartMaps',
+    navbarName: 'SmartMaps',
     icon: Map,
     component: HeatMapPage 
-  },
-  {
-    path: '/green',
-    sidebarName: 'Geenery Map',
-    navbarName: 'Greenery Map',
-    icon: Map,
-    component: GreenMapPage 
   }
+  // {
+  //   path: '/green',
+  //   sidebarName: 'Geenery Map',
+  //   navbarName: 'Greenery Map',
+  //   icon: Map,
+  //   component: GreenMapPage 
+  // }
 ];
 
 export default Routes;
