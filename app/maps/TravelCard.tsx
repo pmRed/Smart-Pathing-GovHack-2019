@@ -4,7 +4,7 @@ import { DirectionsWalk, DirectionsBike, DirectionsBus } from '@material-ui/icon
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import {inject, observer} from 'mobx-react'
-import { Paper, Grid, TextField, Button, TableHead, TableCell } from '@material-ui/core';
+import { Paper, Grid, TextField, Button, TableHead, TableCell, TableBody, TableRow, Table } from '@material-ui/core';
 import MapsStore from './Store'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type InjectedProps = {
 	maps ?: MapsStore
+	table ?: any 
 }
 
 const TravelCard = inject('maps')(
@@ -112,6 +113,7 @@ const TravelCard = inject('maps')(
 		// console.log(source, destination)
 	}
 
+	const rows = props.table
 	return (
 		<Paper className={classes.root}>
 			<Grid
@@ -212,6 +214,7 @@ const TravelCard = inject('maps')(
 					xs={12}
 					className={classes.grid}
 				>
+					<Table>
 					<TableHead>
 						<TableCell>
 							RouteId
@@ -229,7 +232,20 @@ const TravelCard = inject('maps')(
 							Time
 						</TableCell>
 				    </TableHead>
-
+				    <TableBody>
+						{rows.map((row : any) => (
+							<TableRow key={row.name}>
+								<TableCell component="th" scope="row">
+									{row.routeId}
+								</TableCell>
+								<TableCell align="right">{row.heat}</TableCell>
+								<TableCell align="right">{row.green}</TableCell>
+								<TableCell align="right">{row.time}</TableCell>
+								<TableCell align="right">{row.dist}</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+					</Table>
 				</Grid>
 			</Grid>
 		</Paper>
