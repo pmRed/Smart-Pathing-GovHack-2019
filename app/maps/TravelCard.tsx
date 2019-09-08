@@ -248,10 +248,10 @@ const TravelCard = inject('maps')(
 										>
 										</div>
 									</TableCell>
-									<TableCell align="right">{row.heat}</TableCell>
-									<TableCell align="right">{row.green}</TableCell>
-									<TableCell align="right">{row.time/1000/60}</TableCell>
-									<TableCell align="right">{row.distance/1000}</TableCell>
+									<TableCell align="right">{row.heat} deg</TableCell>
+									<TableCell align="right">{row.green} %</TableCell>
+									<TableCell align="right">{row.distance} km</TableCell>
+									<TableCell align="right">{row.time} min</TableCell>
 								</TableRow>
 							)
 						})}
