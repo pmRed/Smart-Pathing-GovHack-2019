@@ -39,9 +39,13 @@ const hslToHex = (h, s, l) => {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 };
 
+// orange, green, blue
+const routeColors = ['#fcba03', '#00b812', '#039dfc'];
+
 
 module.exports = {
   getHSLRed,
   getHSLGreen,
-  hslToHex
+  hslToHex,
+  routeColors
 };
