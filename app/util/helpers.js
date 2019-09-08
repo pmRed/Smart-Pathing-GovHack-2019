@@ -1,6 +1,6 @@
 const getHSLRed = (value) => {
   //value from 0 to 1
-  var hue = ( (1-value) * 60 + 340).toString(10);
+  var hue = ( (1-value) * 90 + 340).toString(10);
   return [hue, 100, 50]
 };
 

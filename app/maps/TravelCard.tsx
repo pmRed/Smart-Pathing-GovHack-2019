@@ -249,7 +249,7 @@ const TravelCard = inject('maps')(
 										</div>
 									</TableCell>
 									<TableCell align="right">{row.heat ? row.heat : 'Waiting'} </TableCell>
-									<TableCell align="right">{row.green ? row.green : 'Waiting'} </TableCell>
+									<TableCell align="right">{row.green ? (row.green * 100).toFixed(0) : 'Waiting'} </TableCell>
 									<TableCell align="right">{row.distance} </TableCell>
 									<TableCell align="right">{row.time} </TableCell>
 								</TableRow>
