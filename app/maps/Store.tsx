@@ -6,6 +6,7 @@ export default class MapStore {
     @observable mode : string = 'walk';
     @observable overlay : string = 'green'
     @observable trigger : boolean = false;
+    @observable table: any = [{}];
 
     @action setMode(mode: string) {
         this.mode = mode

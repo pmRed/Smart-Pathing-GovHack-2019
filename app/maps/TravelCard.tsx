@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: '2px 4px',
       display: 'flex',
       alignItems: 'center',
-    //   maxWidth: 
 	},
 	grid: {
 		display: 'flex',
@@ -39,7 +38,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type InjectedProps = {
 	maps ?: MapsStore
-	table ?: any 
 }
 
 const TravelCard = inject('maps')(
@@ -113,7 +111,7 @@ const TravelCard = inject('maps')(
 		// console.log(source, destination)
 	}
 
-	const rows = props.table
+	const rows = props.maps!.table
 	return (
 		<Paper className={classes.root}>
 			<Grid
@@ -208,7 +206,7 @@ const TravelCard = inject('maps')(
 						<DirectionsIcon className={classes.buttonIcon}/>
 					</Button>
 				</Grid>
-
+				
 				<Grid 
 					item 
 					xs={12}
@@ -217,7 +215,7 @@ const TravelCard = inject('maps')(
 					<Table>
 					<TableHead>
 						<TableCell>
-							RouteId
+							RouteColor
 						</TableCell>
 						<TableCell>
 							Heat	
@@ -233,17 +231,30 @@ const TravelCard = inject('maps')(
 						</TableCell>
 				    </TableHead>
 				    <TableBody>
-						{rows.map((row : any) => (
-							<TableRow key={row.name}>
-								<TableCell component="th" scope="row">
-									{row.routeId}
-								</TableCell>
-								<TableCell align="right">{row.heat}</TableCell>
-								<TableCell align="right">{row.green}</TableCell>
-								<TableCell align="right">{row.time}</TableCell>
-								<TableCell align="right">{row.dist}</TableCell>
-							</TableRow>
-						))}
+						{rows.map((row : any) => {
+							if (row.distance == undefined) {
+								return	
+							}
+							return (
+								<TableRow key={row.name}>
+									<TableCell component="th" scope="row"
+									>
+										<div
+										style={{
+											height: '10px',
+											width: '100%',
+											backgroundColor: row.color
+										}}
+										>
+										</div>
+									</TableCell>
+									<TableCell align="right">{row.heat}</TableCell>
+									<TableCell align="right">{row.green}</TableCell>
+									<TableCell align="right">{row.time}</TableCell>
+									<TableCell align="right">{row.distance}</TableCell>
+								</TableRow>
+							)
+						})}
 					</TableBody>
 					</Table>
 				</Grid>
