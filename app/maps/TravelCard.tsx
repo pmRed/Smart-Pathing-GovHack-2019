@@ -248,9 +248,9 @@ const TravelCard = inject('maps')(
 										>
 										</div>
 									</TableCell>
-									<TableCell align="right">{row.heat}</TableCell>
-									<TableCell align="right">{row.green}</TableCell>
-									<TableCell align="right">{row.time/1000/60}</TableCell>
+									<TableCell align="right">{row.heat ? 'Waiting' : row.heat}</TableCell>
+									<TableCell align="right">{row.green? 'Waiting' : row.green}</TableCell>
+									<TableCell align="right">{row.time}</TableCell>
 									<TableCell align="right">{row.distance/1000}</TableCell>
 								</TableRow>
 							)
